@@ -1,0 +1,19 @@
+# Instructions: Write a program that adds the digits in a 2 digit number. e.g. if the input was 35, then the output should be 3 + 5 = 8
+# 🚨 Don't change the code below 👇
+two_digit_number = input("Type a two digit number: ")
+# 🚨 Don't change the code above 👆
+
+####################################
+#Write your code below this line 👇
+# The first method, get the two digits first before convert them to int type
+first_digit = two_digit_number[0]
+second_digit = two_digit_number[1]
+sum_up_1 = int(first_digit) + int(second_digit)
+print(sum_up_1)
+
+
+# The second method, convert the data type before get the two digits
+num = int(two_digit_number)
+sum_up_2 = num // 10 + num % 10
+print(sum_up_2)
+
