@@ -1,0 +1,45 @@
+# 🚨 Don't change the code below 👇
+print("Welcome to the Love Calculator!")
+name1 = input("What is your name? \n")
+name2 = input("What is their name? \n")
+# 🚨 Don't change the code above 👆
+
+#Write your code below this line 👇
+name1_lower = name1.lower()
+name2_lower = name2.lower()
+
+# count the letters in the word TURE
+T1 = name1_lower.count('t')
+R1 = name1_lower.count('r')
+U1 = name1_lower.count('u')
+E1 = name1_lower.count('e')
+
+T2 = name2_lower.count('t')
+R2 = name2_lower.count('r')
+U2 = name2_lower.count('u')
+E2 = name2_lower.count('e')
+
+total_true = T1 + R1 + U1 + E1 + T2 + R2 + U2 + E2
+
+# count the letters in the word LOVE
+L1 = name1_lower.count('l')
+O1 = name1_lower.count('o')
+V1 = name1_lower.count('v')
+E1 = name1_lower.count('e')
+
+L2 = name2_lower.count('l')
+O2 = name2_lower.count('o')
+V2 = name2_lower.count('v')
+E2 = name2_lower.count('e')
+
+total_love = L1 + O1 + V1 + E1 + L2 + O2 + V2 + E2
+
+# calculate the score and give the conclusion
+score = total_true * 10 + total_love
+
+if score < 10 or score > 90:
+    print(f"Your score is {score}, you go together like coke and mentos.")
+elif score > 40 and score < 50:
+    print(f"Your score is {score}, you are alright together.")
+else :
+    print(f"Your score is {score}.")
