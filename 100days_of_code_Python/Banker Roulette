@@ -1,0 +1,21 @@
+import random
+
+# 🚨 Don't change the code below 👇
+test_seed = int(input("Create a seed number: "))
+random.seed(test_seed)
+
+# Split string method
+names_string = input("Give me everybody's names, separated by a comma. ")
+names = names_string.split(", ")
+# 🚨 Don't change the code above 👆
+
+#Write your code below this line 👇
+list_length = len(names)
+# Be cautious of the line below. The biggest index of items in the list should be length of the list minus one. 
+name_picked = names[random.randint(0, list_length - 1)]
+print(f"{name_picked} is going to buy the meal today!")
+
+# The easier way to randomly choose an item from a list is to use the choice() function.
+
+name_pay = random.choice(names)
+print(f"{name_pay} will pay all the bills this whole week!")
