@@ -1,0 +1,52 @@
+rock = '''
+    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+'''
+
+paper = '''
+    _______
+---'   ____)____
+          ______)
+          _______)
+         _______)
+---.__________)
+'''
+
+scissors = '''
+    _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)
+'''
+
+#Write your code below this line 👇
+import random
+# Use a nested list to simplify the print process
+game_image = [rock, paper, scissors]
+
+print('Welcome to the game Rock Paper Scissors!')
+# Let the player choose first
+your_choice = int(input('What do you choose? Type 0 for rock, 1 for paper or 2 for scissors.\n'))
+if your_choice != 0 and your_choice != 1 and your_choice !=2:
+  print('You typed an invalid number, you lose!')
+else:
+  print(game_image[your_choice])
+  # The computer get a choice randomly
+  computer_choice = random.randint(0,2)
+  print('Computer choose:')
+  print(game_image[computer_choice])
+
+  # Decide the result
+  compare = your_choice - computer_choice
+  if compare == 1 or compare == -2:
+    print('You Win!')
+  elif compare == -1 or compare == 2:
+    print('You Lose!')
+  else :
+      print("It's a draw.")
