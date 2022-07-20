@@ -1,0 +1,153 @@
+
+############### Our Blackjack House Rules #####################
+
+## The deck is unlimited in size. 
+## There are no jokers. 
+## The Jack/Queen/King all count as 10.
+## The the Ace can count as 11 or 1.
+## Use the following list as the deck of cards:
+## cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+## The cards in the list have equal probability of being drawn.
+## Cards are not removed from the deck as they are drawn.
+## The computer is the dealer.
+
+##################### Hints #####################
+
+#Hint 1: Go to this website and try out the Blackjack game: 
+#   https://games.washingtonpost.com/games/blackjack/
+#Then try out the completed Blackjack project here: 
+#   http://blackjack-final.appbrewery.repl.run
+
+import random
+from replit import clear
+from art import logo
+
+def deal_card():
+  cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+  index = random.randint(0, 12)
+  return cards[index]
+
+#Hint 5: Deal the user and computer 2 cards each using deal_card() and append().
+new_game_begin = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ") 
+if new_game_begin == 'y':
+  new_game = True
+  
+while new_game:
+  print(logo)
+  game_end = False
+  
+  user_cards = []
+  computer_cards = []
+  #The user got two cards
+  user_fir_card = deal_card()
+  user_sec_card = deal_card()
+  #Check if the user got two aces
+  if user_fir_card == 11 and user_sec_card == 11:
+    user_sec_card -= 10
+  user_cards.append(user_fir_card)
+  user_cards.append(user_sec_card)
+  user_score = sum(user_cards)
+
+  #The computer got two cards
+  comp_fir_card = deal_card()
+  comp_sec_card = deal_card()
+  #Check if the computer got two aces
+  if comp_fir_card == 11 and comp_sec_card == 11:
+    comp_sec_card -= 10
+  computer_cards.append(comp_fir_card)
+  computer_cards.append(comp_sec_card)
+  computer_score = sum(computer_cards)
+
+  #Print out the first round cards
+  print(f"  Your cards: {user_cards}, current score: {user_score}")
+  print(f"  Computer's first card: {comp_fir_card}")
+  
+  #Check if the user or the computer is blackjack
+  if user_score == 21:
+    print(f"  Your final hand: {user_cards}, final score: {user_score}")
+    print(f"  Computer's final hand: {computer_cards}, final score: {computer_score}")
+    print("You win with a Blackjack 😎")
+    game_end = True
+  elif computer_score == 21:
+    print(f"  Your final hand: {user_cards}, final score: {user_score}")
+    print(f"  Computer's final hand: {computer_cards}, final score: {computer_score}")
+    print("The opponent win with a Blackjack.😭")
+    
+  #No one win with Blackjack in the first round
+  not_game_end = True
+  #Check if the user want another card  
+  another_card = True
+  while another_card and not_game_end:
+    another_user_card = input("Type 'y' to get another card, type 'n' to pass: ")
+    #The user ask for anoter card
+    if another_user_card == 'y':
+      new_user_card = deal_card()
+      #Check if the user went over because of the ace
+      user_score += new_user_card
+      if user_score > 21:
+        if new_user_card == 11:
+          new_user_card -= 10
+        else:
+          for card in user_cards:
+            if card == 11:
+              card -= 10
+      user_cards.append(new_user_card)
+      user_score = sum(user_cards)
+      #Print out the cards in user's hand
+      print(f"  Your cards: {user_cards}, current score: {user_score}")
+      print(f"  Computer's first card: {comp_fir_card}")
+      
+      #Check if the uer went over or blackjack
+      if user_score > 21:
+        computer_score = sum(computer_cards)
+        print(f"  Your final hand: {user_cards}, final score: {user_score}")
+        print(f"  Computer's final hand: {computer_cards}, final score: {computer_score}")
+        print("You went over. You Lose 😭")
+        not_game_end = False
+      elif user_score == 21:
+        print(f"  Your final hand: {user_cards}, final score: {user_score}")
+        print(f"  Computer's final hand: {computer_cards}, final score: {computer_score}")
+        print("You win with a Blackjack 😎")
+        not_game_end = False
+    
+      # The user don't want another card, compare the final score 
+    else:
+      computer_score = sum(computer_cards)
+      while computer_score <= 17 or computer_score < user_score and not_game_end:
+        computer_cards.append(deal_card())
+        computer_score = sum(computer_cards)
+        if computer_score >= 21:
+          not_game_end = False
+      
+      #No more new cards for both side, compare the final score
+      if computer_score > 21:
+        print(f"  Your final hand: {user_cards}, final score: {user_score}")
+        print(f"  Computer's final hand: {computer_cards}, final score: {computer_score}")
+        print("Opponent went over. You win 😎")
+        not_game_end = False
+      elif user_score > computer_score:
+        print(f"  Your final hand: {user_cards}, final score: {user_score}")
+        print(f"  Computer's final hand: {computer_cards}, final score: {computer_score}")
+        print("You win 😎")
+        not_game_end = False
+      elif user_score == computer_score:
+        print(f"  Your final hand: {user_cards}, final score: {user_score}")
+        print(f"  Computer's final hand: {computer_cards}, final score: {computer_score}")
+        print("Draw 🙃")
+        not_game_end = False
+      elif computer_score == 21:
+        print(f"  Your final hand: {user_cards}, final score: {user_score}")
+        print(f"  Computer's final hand: {computer_cards}, final score: {computer_score}")
+        print("The opponent win with a Blackjack.😭")
+      else: 
+        print(f"  Your final hand: {user_cards}, final score: {user_score}")
+        print(f"  Computer's final hand: {computer_cards}, final score: {computer_score}")
+        print("You Lose 😭")
+        not_game_end = False
+  # The game ended. Ask if the user want to play again
+  new_game_begin = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ") 
+  if new_game_begin == 'n':
+    new_game = False
+  else:
+    clear()
+
