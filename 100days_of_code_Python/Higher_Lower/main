@@ -1,0 +1,46 @@
+from art import logo
+from art import vs
+from replit import clear
+from game_data import data
+import random
+
+def compare_follower(a,b):
+  if a > b:
+    return 'a'
+  else:
+    return 'b'
+
+not_game_end = True
+score = 0
+data_num = len(data)
+
+compare_a = random.randint(0, data_num - 1)
+print(logo)
+
+while not_game_end:
+  compare_b = random.randint(0, data_num - 1)
+  while compare_a == compare_b:
+    compare_b = random.randint(0, data_num - 1)
+  
+  answer = compare_follower(data[compare_a]['follower_count'], data[compare_b]['follower_count'])
+
+  print(f"Compare A: {data[compare_a]['name']}, {data[compare_a]['description']}, from {data[compare_a]['country']}.")
+  print(vs)
+  print(f"Against B: {data[compare_b]['name']}, {data[compare_b]['description']}, from {data[compare_b]['country']}.")
+  guess = input("Who has more followers? Type 'A' or 'B': ").lower()
+  
+  if guess == answer:
+    score += 1
+    clear()
+    print(logo)
+    print(f"You're right! Current Score: {score}")
+    compare_a = compare_b
+  else:
+    not_game_end = False
+    clear()
+    print(logo)
+    print(f"Sorry, that's wrong. Final score: {score}")
+
+
+
+
