@@ -1,0 +1,75 @@
+from turtle import Turtle, Screen
+import random
+
+screen = Screen()
+screen.setup(width=500, height=400)
+
+# ---------------------------------------------------------------------------
+# Etch_A_Sketch
+
+
+# timmy = Turtle()
+#
+# def move_forwards():
+#     timmy.forward(10)
+#
+#
+# def move_backwards():
+#     timmy.backward(10)
+#
+#
+# def counter_clockwise():
+#     new_heading = timmy.heading() + 10
+#     timmy.setheading(new_heading)
+#
+#
+# def clockwise():
+#     new_heading = timmy.heading() - 10
+#     timmy.setheading(new_heading)
+#
+#
+# def clear():
+#     timmy.clear()
+#     timmy.penup()
+#     timmy.home()
+#     timmy.pendown()
+#
+#
+# screen.listen()
+# screen.onkey(key="w", fun=move_forwards)
+# screen.onkey(key="s", fun=move_backwards)
+# screen.onkey(key="a", fun=counter_clockwise)
+# screen.onkey(key="d", fun=clockwise)
+# screen.onkey(key="c", fun=clear)
+# ---------------------------------------------------------------------------
+
+
+color = ["red", "yellow", "green", "blue", "purple", "orange"]
+is_race_on = False
+user_bet = screen.textinput(title="Make your bet", prompt="Which turtle will win the race? Enter a color: ")
+x_position = -230
+y_position = -70
+all_turtles = []
+for item in color:
+    turtle = Turtle(shape="turtle")
+    turtle.color(item)
+    all_turtles.append(turtle)
+    turtle.penup()
+    turtle.goto(x=x_position, y=y_position)
+    y_position += 30
+
+if user_bet:
+    is_race_on = True
+
+while is_race_on:
+
+    for turtle in all_turtles:
+        if turtle.xcor() >= 230:
+            is_race_on = False
+            if turtle.color() == user_bet:
+                print(f"You've win! The {turtle.pencolor()} turtle win the race.")
+            else:
+                print(f"You've lost! The {turtle.pencolor()} turtle win the race.")
+        turtle.forward(random.randint(0, 10))
+
+screen.exitonclick()
