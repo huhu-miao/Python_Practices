@@ -29,9 +29,9 @@ def reset():
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 def start_timer():
     global reps
-    work_sec = WORK_MIN * 10
-    short_break_sec = SHORT_BREAK_MIN * 5
-    long_break_sec = LONG_BREAK_MIN * 15
+    work_sec = WORK_MIN * 60
+    short_break_sec = SHORT_BREAK_MIN * 60
+    long_break_sec = LONG_BREAK_MIN * 60
 
     if reps % 2 == 0 and reps < 7:
         count_down(work_sec)
@@ -64,7 +64,7 @@ def count_down(count):
     if count == 0:
         reps += 1
         if reps % 2 == 0:
-            check_mark += "✔"
+            check_mark += "🍅"
             check_label.config(text=check_mark)
         start_timer()
 
